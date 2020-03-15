@@ -1,3 +1,4 @@
 # RubixCube
 
-Rubixcube developped with Unity engine
+Based on rubixcube game
+Developped with Unity engine
