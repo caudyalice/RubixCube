@@ -67,15 +67,15 @@ public class RotateFace : MonoBehaviour
         List<Material[]> NewcubeMaterial = cubeMaterial;
         for (int i = 0; i < cubes.Count; i++)
         {
-            if (!cubeMiddle.Contains(cubes[i]))
+            if (!cubeMiddle.Contains(cubes[i])) // Doesn't take cube on middle faces
             {
                 var firstOddNumberIndex = NewcubeMaterial.Select((f, j) => new { f, j })
-                .Where(x => x.f.Length == cubes[i].GetComponent<Renderer>().materials.Length && x.j > i && !cubeMiddle.Contains(cubes[x.j]))
+                .Where(x => x.f.Length == cubes[i].GetComponent<Renderer>().materials.Length && x.j > i && !cubeMiddle.Contains(cubes[x.j])) // select cubes with same materials count that are not already move 
                 .Select(x => x.j);
                 List<int> indexs = firstOddNumberIndex.ToList();
                 if (indexs.Count >= 1)
                 {
-                    int randomIndex = Random.Range(0, indexs.Count);
+                    int randomIndex = Random.Range(0, indexs.Count); //random choices of materials
                     cubes[i].GetComponent<Renderer>().materials = NewcubeMaterial[indexs[randomIndex]];
                     NewcubeMaterial[indexs[randomIndex]] = NewcubeMaterial[i];
                     NewcubeMaterial[i] = cubes[i].GetComponent<Renderer>().materials;
@@ -87,7 +87,7 @@ public class RotateFace : MonoBehaviour
     }
 
 
-    public void resetRubixcube()
+    public void resetRubixcube() // cancel all movements made by user
     {
         for (int i = 0; i < numFaces; i++)
         {
